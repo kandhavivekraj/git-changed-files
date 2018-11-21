@@ -1,6 +1,6 @@
 # git-changed-files  
 
-> Get the committed changes between your protected branch and current branch of a `git` repository
+> Get the committed file changes between your protected branch and current branch of a `git` repository
 
 ##### Note: It will not give files that are currently in staging and working directories.
 
@@ -33,7 +33,7 @@ gitChangedFiles()
     console.log(err);
   });
 
-Expected: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ]
+// Expected: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ]
 
 
 gitChangedFiles({ formats: ['*.yml'] })
@@ -44,7 +44,7 @@ gitChangedFiles({ formats: ['*.yml'] })
     console.log(err);
   });
 
-Expected: [ '.travis.yml' ]
+// Expected: [ '.travis.yml' ]
 
 
 gitChangedFiles({ formats: ['!*.yml'] })
@@ -55,7 +55,7 @@ gitChangedFiles({ formats: ['!*.yml'] })
     console.log(err);
   });
 
-Expected: [ '.editorconfig', 'destroy.js', 'index.js' ]
+// Expected: [ '.editorconfig', 'destroy.js', 'index.js' ]
 
 
 const gitStatus = require('git-changed-files');
@@ -68,7 +68,7 @@ gitStatus({ diffFilter: 'A' })
     console.log(err);
   });
 
-Expected: [ 'destroy.js' ]
+// Expected: [ 'destroy.js' ]
 
 ```
 
