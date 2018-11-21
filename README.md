@@ -1,6 +1,6 @@
 # git-changed-files  
 
-> Get the committed file changes between your protected branch and current branch of a `git` repository
+> Get the committed file list between your protected branch and current branch of a `git` repository
 
 ##### Note: It will not give files that are currently in staging and working directories.
 
