@@ -131,7 +131,7 @@ Refer More [here](https://git-scm.com/docs/git-diff#git-diff---diff-filterACDMRT
 * If you have any ideas, just open an [issue](https://github.com/kandhavivekraj/git-changed-files/issues) and tell me what you think.
 * Pull requests are warmly welcome, If you would like to contribute to this Project.
 
-## Future Goal
+## TODO
 
 - Need to add staging and working dir files also.
 
