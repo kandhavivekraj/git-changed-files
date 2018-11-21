@@ -22,7 +22,7 @@ or
 
 ### Usage
 
-```
+```js
 const gitChangedFiles = require('git-changed-files');
 
 gitChangedFiles()
