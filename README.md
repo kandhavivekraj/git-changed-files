@@ -1,12 +1,12 @@
 # git-changed-files  
 
-> Get the committed files list between your protected branch and current branch of a `git` repository
+> Get the committed files list between your any of your branch and current branch of a `git` repository
 
 ##### Note: It will not give files that are currently in staging and working directories.
 
 - Filter based on file type.
 - Promise API
-- Filter based on the status of files
+- Filter files based on the type of change(Example: modified or added or ...)
 
 
 ### Installing
@@ -25,46 +25,40 @@ or
 ```js
 const gitChangedFiles = require('git-changed-files');
 
-gitChangedFiles()
-  .then((committedGitFiles = []) => {
-    console.log(committedGitFiles);
-  })
-  .catch((err) => {
+(async() => {
+  let committedGitFiles = await gitStatus();
+  console.log(committedGitFiles);
+})().catch((err) => {
     console.log(err);
   });
 
 // Expected: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ]
 
 
-gitChangedFiles({ formats: ['*.yml'] })
-  .then((committedGitFiles = []) => {
-    console.log(committedGitFiles);
-  })
-  .catch((err) => {
+(async() => {
+  let committedGitFiles = await gitStatus({ formats: ['*.yml'] });
+  console.log(committedGitFiles);
+})().catch((err) => {
     console.log(err);
   });
 
 // Expected: [ '.travis.yml' ]
 
 
-gitChangedFiles({ formats: ['!*.yml'] })
-  .then((committedGitFiles = []) => {
-    console.log(committedGitFiles);
-  })
-  .catch((err) => {
+(async() => {
+  let committedGitFiles = await gitStatus({ formats: ['!*.yml'] });
+  console.log(committedGitFiles);
+})().catch((err) => {
     console.log(err);
   });
 
 // Expected: [ '.editorconfig', 'destroy.js', 'index.js' ]
 
 
-const gitStatus = require('git-changed-files');
-
-gitStatus({ diffFilter: 'A' })
-  .then((committedGitFiles = []) => {
-    console.log(committedGitFiles);
-  })
-  .catch(err => {
+(async() => {
+  let committedGitFiles = await gitStatus({ diffFilter: 'A' });
+  console.log(committedGitFiles);
+})().catch((err) => {
     console.log(err);
   });
 
