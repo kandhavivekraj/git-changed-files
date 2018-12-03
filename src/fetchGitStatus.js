@@ -6,14 +6,21 @@ const {
   filterFiles
 } = require('../src/filterFiles');
 
+const {
+  formatOutput
+} = require('../src/formatOutput');
+
 function fetchGitStatus(options) {
   let {
     baseBranch,
     diffFilter,
-    formats
+    formats,
+    showStatus
   } = options;
 
-  let command = `git diff --relative --name-only --diff-filter=${diffFilter} ${baseBranch}...HEAD`;
+  let statusCmd = showStatus ? '--name-status' : '--name-only';
+
+  let command = `git diff --relative ${statusCmd} --diff-filter=${diffFilter} ${baseBranch}...HEAD`;
 
   let [bin, ...args] = command.split(' ');
 
@@ -40,6 +47,10 @@ function fetchGitStatus(options) {
             fileList = filterFiles(fileList, formats);
           }
 
+          if(showStatus) {
+            fileList = formatOutput(fileList);
+          }
+          
           resolve(fileList);
         }
 
