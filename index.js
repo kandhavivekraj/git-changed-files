@@ -23,7 +23,8 @@ module.exports = function (userConfig) {
   let defaultConfig = {
     baseBranch: 'master',
     diffFilter: 'ACDMRTUXB',
-    formats: false
+    formats: false,
+    showStatus: false
   };
 
   const config = Object.assign(defaultConfig, userConfig);

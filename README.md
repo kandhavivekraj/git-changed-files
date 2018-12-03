@@ -26,7 +26,7 @@ or
 const gitChangedFiles = require('git-changed-files');
 
 (async() => {
-  let committedGitFiles = await gitStatus();
+  let committedGitFiles = await gitChangedFiles();
   console.log(committedGitFiles);
 })().catch((err) => {
     console.log(err);
@@ -36,7 +36,7 @@ const gitChangedFiles = require('git-changed-files');
 
 
 (async() => {
-  let committedGitFiles = await gitStatus({ formats: ['*.yml'] });
+  let committedGitFiles = await gitChangedFiles({ formats: ['*.yml'] });
   console.log(committedGitFiles);
 })().catch((err) => {
     console.log(err);
@@ -46,7 +46,7 @@ const gitChangedFiles = require('git-changed-files');
 
 
 (async() => {
-  let committedGitFiles = await gitStatus({ formats: ['!*.yml'] });
+  let committedGitFiles = await gitChangedFiles({ formats: ['!*.yml'] });
   console.log(committedGitFiles);
 })().catch((err) => {
     console.log(err);
@@ -56,13 +56,29 @@ const gitChangedFiles = require('git-changed-files');
 
 
 (async() => {
-  let committedGitFiles = await gitStatus({ diffFilter: 'A' });
+  let committedGitFiles = await gitChangedFiles({ diffFilter: 'A' });
   console.log(committedGitFiles);
 })().catch((err) => {
     console.log(err);
   });
 
 // Expected: [ 'destroy.js' ]
+
+(async() => {
+  let committedGitFiles = await gitChangedFiles({ showStatus: true });
+  console.log(committedGitFiles);
+})().catch((err) => {
+    console.log(err);
+  });
+
+/*
+Expected:
+  [ { filename: '.editorconfig', status: 'Deleted' },
+  { filename: '.travis.yml', status: 'Modified' },
+  { filename: 'destroy.js', status: 'Added' },
+  { filename: 'index.js', status: 'Modified' },
+  { filename: 'package.json', status: 'Modified' } ]
+*/
 
 ```
 
@@ -113,6 +129,17 @@ Default: `ACDMRTUXB`
   - Broken (B)
 
 Refer More [here](https://git-scm.com/docs/git-diff#git-diff---diff-filterACDMRTUXB82308203)
+
+##### showStatus
+
+Type: `boolean`<br />
+Default: `false`
+
+To show the type of file change in the result.
+
+Example: If showStatus is true then output will be
+
+  `[{ filename: '.editorconfig', status: 'Deleted' }]`
 
 ## Built With
 
