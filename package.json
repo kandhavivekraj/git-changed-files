@@ -1,6 +1,6 @@
 {
   "name": "git-changed-files",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Get the change between any of your branch and current branch of a `git` repository",
   "license": "MIT",
   "repository": "https://github.com/kandhavivekraj/git-changed-files",
