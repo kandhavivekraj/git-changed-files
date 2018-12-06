@@ -1,8 +1,10 @@
-const chalk = require('chalk');
-
 const {
   fetchGitStatus
 } = require('./src/fetchGitStatus');
+
+const {
+  DEFAULT_CONFIG
+} = require('./lib/constants');
 
 /*
   Diff filters :
@@ -20,14 +22,7 @@ const {
 
 module.exports = function (userConfig) {
 
-  let defaultConfig = {
-    baseBranch: 'master',
-    diffFilter: 'ACDMRTUXB',
-    formats: false,
-    showStatus: false
-  };
-
-  const config = Object.assign(defaultConfig, userConfig);
+  const config = Object.assign(DEFAULT_CONFIG, userConfig);
 
   return fetchGitStatus(config);
 };

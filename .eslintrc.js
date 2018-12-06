@@ -46,7 +46,7 @@ module.exports = {
           "always"
         ],
         'no-var': "error",
-        'no-undef': 'off',
+        'no-undef': 'error',
         'no-unused-vars': 'off',
         "comma-dangle": ["error", "never"],
         "no-console": 'off'

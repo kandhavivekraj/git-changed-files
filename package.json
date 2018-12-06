@@ -8,15 +8,20 @@
     "name": "Kandha Vivek Raj",
     "email": "kandhavivekraj@gmail.com"
   },
+  "bin": "lib/cli.js",
   "engines": {
     "node": ">=6"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "src/fetchGitStatus.js",
+    "src/filterFiles.js"
   ],
   "devDependencies": {
     "eslint": "^5.9.0",
-    "matcher": "^1.1.1"
+    "matcher": "^1.1.1",
+    "chalk": "2.4.1",
+    "minimist": "1.2.0"
   },
   "keywords": [
     "git-changed-files",
