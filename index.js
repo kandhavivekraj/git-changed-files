@@ -1,5 +1,3 @@
-const chalk = require('chalk');
-
 const {
   fetchGitStatus
 } = require('./src/fetchGitStatus');
