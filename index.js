@@ -22,7 +22,9 @@ module.exports = function (userConfig) {
     baseBranch: 'master',
     diffFilter: 'ACDMRTUXB',
     formats: false,
-    showStatus: false
+    showStatus: false,
+    showCommitted: true,
+    showUnCommitted: true
   };
 
   const config = Object.assign(defaultConfig, userConfig);
