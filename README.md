@@ -1,12 +1,12 @@
 # git-changed-files  
 
-> Get the committed files list between your any of your branch and current branch of a `git` repository
-
-##### Note: It will not give files that are currently in staging and working directories.
+> Get the committed and uncommitted files list between your any of your branch and current branch of a `git` repository
 
 - Filter based on file type.
 - Promise API
 - Filter files based on the type of change(Example: modified or added or ...)
+- Filter the files with status.
+- Filter files based on files stage (Ex: committed, uncommitted(staged and working directory files)).
 
 
 ### Installing
@@ -32,8 +32,9 @@ const gitChangedFiles = require('git-changed-files');
     console.log(err);
   });
 
-// Expected: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ]
-
+/* Expected: { committedFiles: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ],
+               unCommittedFiles: ['index.js'] }
+*/
 
 (async() => {
   let committedGitFiles = await gitChangedFiles({ formats: ['*.yml'] });
@@ -42,8 +43,9 @@ const gitChangedFiles = require('git-changed-files');
     console.log(err);
   });
 
-// Expected: [ '.travis.yml' ]
-
+/* Expected: { committedFiles: [ '.travis.yml'],
+               unCommittedFiles: [] }
+*/
 
 (async() => {
   let committedGitFiles = await gitChangedFiles({ formats: ['!*.yml'] });
@@ -52,8 +54,9 @@ const gitChangedFiles = require('git-changed-files');
     console.log(err);
   });
 
-// Expected: [ '.editorconfig', 'destroy.js', 'index.js' ]
-
+/* Expected: { committedFiles: [ '.editorconfig', 'destroy.js', 'index.js' ],
+               unCommittedFiles: ['index.js'] }
+*/
 
 (async() => {
   let committedGitFiles = await gitChangedFiles({ diffFilter: 'A' });
@@ -62,7 +65,9 @@ const gitChangedFiles = require('git-changed-files');
     console.log(err);
   });
 
-// Expected: [ 'destroy.js' ]
+/* Expected: { committedFiles: ['destroy.js'],
+               unCommittedFiles: [] }
+*/
 
 (async() => {
   let committedGitFiles = await gitChangedFiles({ showStatus: true });
@@ -73,12 +78,51 @@ const gitChangedFiles = require('git-changed-files');
 
 /*
 Expected:
-  [ { filename: '.editorconfig', status: 'Deleted' },
-  { filename: '.travis.yml', status: 'Modified' },
-  { filename: 'destroy.js', status: 'Added' },
-  { filename: 'index.js', status: 'Modified' },
-  { filename: 'package.json', status: 'Modified' } ]
-*/
+{ 
+  committedFiles: [ 
+    {
+      fileName: '.editorconfig',
+      status: 'Modified'
+    },
+    {
+      fileName: '.travis.yml'
+      status: 'Modified'
+    },
+    {
+      fileName: 'destroy.js'
+      status: 'Added'
+    },
+    {
+      fileName: 'index.js'
+      status: 'Modified'
+    }
+  ],
+  unCommittedFiles: [
+    {
+      fileName: 'index.js'
+      status: 'Modified'
+    }
+  ]
+ }
+ */
+ 
+(async() => {
+  let uncommittedGitFiles = await gitChangedFiles({ showCommitted: false });
+  console.log(uncommittedGitFiles);
+})().catch((err) => {
+  console.log(err);
+  });
+  
+// Expected: { unCommittedFiles: ['index.js'] }
+
+(async() => {
+  let committedGitFiles = await gitChangedFiles({ showUnCommitted: false });
+  console.log(committedGitFiles);
+})().catch((err) => {
+  console.log(err);
+  });
+  
+// Expected: { committedFiles: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ] }
 
 ```
 
@@ -140,6 +184,42 @@ To show the type of file change in the result.
 Example: If showStatus is true then output will be
 
   `[{ filename: '.editorconfig', status: 'Deleted' }]`
+  
+##### showCommitted & showUnCommitted
+
+Type: `boolean`<br />
+Default: `true`
+
+Examples: 
+
+Case 1:
+
+  By default, it lists all the changed files.
+
+  `{ committedFiles: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ], 
+     unCommittedFiles: ['index.js'] }`
+
+Case 2: 
+
+  If `showUnCommitted` is false then output will be
+  
+  `{ committedFiles: [ '.editorconfig', '.travis.yml', 'destroy.js', 'index.js' ] }`
+
+Case 3: 
+
+  If `showCommitted` is false then output will be
+
+  `{ unCommittedFiles: ['index.js'] }`
+  
+Case 4: 
+
+  If both options are false then it will throw an error.
+
+  `Either showCommitted or showUnCommitted must be true`
+    
+##### Note: 
+
+  If you changed a file and committed then again if you changed the same file, it will be present in both committed and uncommitted files list.
 
 ## Built With
 
@@ -151,10 +231,6 @@ Example: If showStatus is true then output will be
 
 * If you have any ideas, just open an [issue](https://github.com/kandhavivekraj/git-changed-files/issues) and tell me what you think.
 * Pull requests are warmly welcome, If you would like to contribute to this Project.
-
-## TODO
-
-- Need to add staging and working dir files also.
 
 ## License
 
