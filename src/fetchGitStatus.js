@@ -1,7 +1,6 @@
 const {
   spawnSync
 } = require('child_process');
-
 const chalk = require('chalk');
 
 const {
@@ -20,6 +19,20 @@ function findError(error) {
   return error;
 }
 
+function removeDuplicateObjectsFromArray(finalList, nodeName) {
+  return finalList.filter((obj, index, arrayList) => {
+    return arrayList.map((mapObj) => mapObj[nodeName]).indexOf(obj[nodeName]) === index;
+  });
+}
+
+function removeDuplicateEntries(stagedFiles, unStagedFiles) {
+  // Need to check if the type is object as for showStatus=true we get an array of strings.
+  if(typeof stagedFiles[0] === 'object' || unStagedFiles[0] === 'object') {
+    return removeDuplicateObjectsFromArray([...stagedFiles, ...unStagedFiles], 'filename');
+  }
+  let finalList = new Set([...stagedFiles, ...unStagedFiles]);
+  return [...finalList];
+}
 function findFiles(cmd, formats, showStatus) {
 
   let [bin, ...args] = cmd.split(' ');
@@ -89,8 +102,7 @@ function fetchGitStatus(options) {
       if (showUnCommitted) {
         stagedFiles = findFiles(stagedCmd, formats, showStatus);
         unStagedFiles = findFiles(baseCmd, formats, showStatus);
-        let finalList = new Set([...stagedFiles, ...unStagedFiles]);
-        fileList.unCommittedFiles = [...finalList];
+        fileList.unCommittedFiles = removeDuplicateEntries(stagedFiles, unStagedFiles);
       }
 
       resolve(fileList);
