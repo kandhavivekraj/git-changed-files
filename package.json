@@ -22,7 +22,7 @@
     "matcher": "^1.1.1"
   },
   "devDependencies": {
-    "eslint": "^5.9.0"
+    "eslint": "^7.7.0"
   },
   "keywords": [
     "git-changed-files",
