@@ -23,7 +23,7 @@ or
 ### Usage
 
 ```js
-const gitChangedFiles = require('git-changed-files');
+import gitChangedFiles from 'git-changed-files'
 
 (async() => {
   let committedGitFiles = await gitChangedFiles();

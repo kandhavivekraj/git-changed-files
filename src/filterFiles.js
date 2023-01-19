@@ -1,9 +1,6 @@
-const {
-  spawnSync
-} = require('child_process');
-const matcher = require('matcher');
+import {matcher} from 'matcher';
 
-function filterFiles(files, options) {
+export default function filterFiles(files, options) {
   let filteredFiles = [];
   for (let format of options) {
     let tempFiles = files.filter(file => {
@@ -13,7 +10,3 @@ function filterFiles(files, options) {
   }
   return filteredFiles;
 }
-
-module.exports = {
-  filterFiles
-};

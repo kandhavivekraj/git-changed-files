@@ -1,15 +1,7 @@
-const {
-  spawnSync
-} = require('child_process');
-const chalk = require('chalk');
-
-const {
-  filterFiles
-} = require('../src/filterFiles');
-
-const {
-  formatOutput
-} = require('../src/formatOutput');
+import { spawnSync } from 'child_process';
+import chalk from 'chalk';
+import filterFiles from '../src/filterFiles.js';
+import formatOutput from '../src/formatOutput.js';
 
 function findError(error) {
   error = error.toString();
@@ -59,7 +51,7 @@ function findFiles(cmd, formats, showStatus) {
   return files;
 }
 
-function fetchGitStatus(options) {
+export default function fetchGitStatus(options) {
 
   return new Promise((resolve, reject) => {
 
@@ -114,8 +106,3 @@ function fetchGitStatus(options) {
   });
 
 }
-
-
-module.exports = {
-  fetchGitStatus
-};
