@@ -22,6 +22,6 @@ function formatOutput(files) {
   return formattedOutput;
 }
 
-module.exports = {
+export default {
   formatOutput
 };

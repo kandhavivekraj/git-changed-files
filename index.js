@@ -1,6 +1,4 @@
-const {
-  fetchGitStatus
-} = require('./src/fetchGitStatus');
+import fetchGitStatus from './src/fetchGitStatus.js';
 
 /*
   Diff filters :
@@ -16,7 +14,7 @@ const {
     https://git-scm.com/docs/git-diff#git-diff---diff-filterACDMRTUXB82308203
 */
 
-module.exports = function (userConfig) {
+export default function gitChangedFiles(userConfig) {
 
   let defaultConfig = {
     baseBranch: 'master',

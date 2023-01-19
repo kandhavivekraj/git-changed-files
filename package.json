@@ -8,6 +8,7 @@
     "name": "Kandha Vivek Raj",
     "email": "kandhavivekraj@gmail.com"
   },
+  "type":"module",
   "engines": {
     "node": ">=6"
   },
