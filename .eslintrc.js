@@ -50,5 +50,6 @@ module.exports = {
         'no-unused-vars': 'off',
         "comma-dangle": ["error", "never"],
         "no-console": 'off'
-    }
+    },
+    ignorePatterns: ['*.d.ts']
 };
